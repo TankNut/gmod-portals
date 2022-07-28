@@ -1,0 +1,13 @@
+{
+	"title": "Portals",
+	"type":	"entity",
+	"tags":	["fun", "roleplay"],
+	"ignore":
+	[
+		"*.bat",
+		"*.jpg",
+		"*.md",
+		".git*",
+		"LICENSE"
+	]
+}
