@@ -1,7 +1,7 @@
 # Portals
 An addon for Garry's Mod that adds Half-Life 1 style portal entities.
 
-### [Workshop link]()
+### [Workshop link](https://steamcommunity.com/sharedfiles/filedetails/?id=2841352626)
 
 ## Features
 * One-way and two-way portals
