@@ -6,20 +6,12 @@ ENT.Type = "anim"
 ENT.RenderGroup = RENDERGROUP_TRANSLUCENT
 
 ENT.Model = Model("models/effects/intro_vortshield.mdl")
-ENT.Color = color_white
 
 ENT.Mins = Vector(-25, -25, -25)
 ENT.Maxs = Vector(25, 25, 25)
 
-ENT.LightParams = {
-	brightness = 2,
-	Decay = 1000,
-	Size = 128
-}
-
 function ENT:Initialize()
 	self:SetModel(self.Model)
-	self:SetColor(self.Color)
 
 	self:DrawShadow(false)
 
@@ -47,21 +39,29 @@ if CLIENT then
 		return not self:IsDormant() and EyePos():DistToSqr(self:GetPos()) < range
 	end
 
+	function ENT:GetCustomColor()
+		return color_white
+	end
+
 	function ENT:Think()
+		local color = self:GetCustomColor()
+
+		if self:GetColor() != color then
+			self:SetColor(color)
+		end
+
 		if self:ShouldDoLight() then
 			local light = DynamicLight(self:EntIndex())
 
 			if light then
 				light.pos = self:GetPos()
+				light.r = color.r
+				light.g = color.g
+				light.b = color.b
+				light.brightness = 2
+				light.Decay = 1000
+				light.Size = 128
 				light.DieTime = CurTime() + 1
-
-				for k, v in pairs(self.LightParams) do
-					if istable(v) then
-						continue
-					end
-
-					light[k] = v
-				end
 			end
 		end
 

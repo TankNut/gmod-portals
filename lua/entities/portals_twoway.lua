@@ -9,12 +9,6 @@ ENT.Category = "Portals"
 
 ENT.Spawnable = true
 
-ENT.Color = Color(127, 255, 255)
+ENT.BaseColor = Color(127, 255, 255)
 
 ENT.ExitType = "portals_twoway"
-
-ENT.LightParams = {
-	r = 127,
-	g = 255,
-	b = 255
-}

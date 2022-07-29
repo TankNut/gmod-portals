@@ -9,8 +9,6 @@ ENT.Category = "Portals"
 ENT.Spawnable = true
 ENT.AdminOnly = true
 
-ENT.Color = Color(255, 80, 80)
-
 ENT.Mins = Vector(-40, -40, -50)
 ENT.Maxs = Vector(40, 40, 40)
 
@@ -21,12 +19,21 @@ if CLIENT then
 		end
 	end
 
+	function ENT:GetCustomColor()
+		return Color(255, 80, 80)
+	end
+
 	local matrix = Matrix()
 
 	matrix:SetScale(Vector(2, 2, 2))
 
 	function ENT:Think()
 		local light = DynamicLight(self:EntIndex())
+		local color = self:GetCustomColor()
+
+		if self:GetColor() != color then
+			self:SetColor(color)
+		end
 
 		if light then
 			light.pos = self:GetPos()
