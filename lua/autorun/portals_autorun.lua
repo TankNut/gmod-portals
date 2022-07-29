@@ -1,5 +1,5 @@
 if SERVER then
-	--resource.AddWorkshop("")
+	resource.AddWorkshop("2841352626")
 end
 
 if CLIENT then
