@@ -113,10 +113,6 @@ else
 			return ent:GetMoveType() != MOVETYPE_NOCLIP
 		end
 
-		if ent:IsNPC() or ent:IsVehicle() then
-			return false
-		end
-
 		local phys = ent:GetPhysicsObject()
 
 		if IsValid(phys) and not phys:IsMotionEnabled() then
