@@ -31,10 +31,8 @@ function ENT:SetupDataTables()
 	self:SetPortalColor(self.BaseColor:ToVector())
 end
 
-if CLIENT then
-	local allow = GetConVar("portals_allow_custom_colors")
+local allow = GetConVar("portals_allow_custom_colors")
 
-	function ENT:GetCustomColor()
-		return allow:GetBool() and self:GetPortalColor():ToColor() or self.BaseColor
-	end
+function ENT:GetCustomColor()
+	return allow:GetBool() and self:GetPortalColor():ToColor() or self.BaseColor
 end

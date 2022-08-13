@@ -40,12 +40,10 @@ function ENT:SetupDataTables()
 	self:SetPortalColor(self.BaseColor:ToVector())
 end
 
-if CLIENT then
-	local allow = GetConVar("portals_allow_custom_colors")
+local allow = GetConVar("portals_allow_custom_colors")
 
-	function ENT:GetCustomColor()
-		return allow:GetBool() and self:GetPortalColor():ToColor() or self.BaseColor
-	end
+function ENT:GetCustomColor()
+	return allow:GetBool() and self:GetPortalColor():ToColor() or self.BaseColor
 end
 
 if SERVER then
@@ -82,7 +80,7 @@ if SERVER then
 
 			ent:SetVelocity(-ent:GetVelocity())
 
-			ent:ScreenFade(SCREENFADE.IN, self.Color, 0.5, 0)
+			ent:ScreenFade(SCREENFADE.IN, self:GetCustomColor(), 0.5, 0)
 		else
 			local ang = exit:LocalToWorldAngles(self:WorldToLocalAngles(ent:GetAngles()))
 			local rot = exit:LocalToWorldAngles(-self:GetAngles())

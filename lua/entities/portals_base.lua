@@ -25,6 +25,10 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_WORLD)
 end
 
+function ENT:GetCustomColor()
+	return color_white
+end
+
 if CLIENT then
 	local lightsEnabled = GetConVar("portals_lights_enabled")
 	local lightsRange = GetConVar("portals_lights_range")
@@ -37,10 +41,6 @@ if CLIENT then
 		local range = lightsRange:GetFloat() * lightsRange:GetFloat()
 
 		return not self:IsDormant() and EyePos():DistToSqr(self:GetPos()) < range
-	end
-
-	function ENT:GetCustomColor()
-		return color_white
 	end
 
 	function ENT:Think()
@@ -76,20 +76,18 @@ if CLIENT then
 			local mins = self.Mins - Vector(0.1, 0.1, 0.1)
 			local maxs = self.Maxs + Vector(0.1, 0.1, 0.1)
 
-			local color = ColorAlpha(self.Color, 50)
+			local color = ColorAlpha(self:GetCustomColor(), 50)
 
 			render.SetColorMaterial()
 			render.DrawBox(self:GetPos(), self:GetNetworkAngles(), mins, maxs, color, true)
 			render.DrawWireframeBox(self:GetPos(), self:GetNetworkAngles(), mins, maxs, color, true)
 
-			render.DrawLine(self:GetPos(), self:GetPos() + self:GetForward() * 50, self.Color, true)
+			render.DrawLine(self:GetPos(), self:GetPos() + self:GetForward() * 50, self:GetCustomColor(), true)
 		end
-
-		local size = 150
 
 		render.OverrideBlend(true, BLEND_ZERO, BLEND_ONE_MINUS_SRC_COLOR, BLENDFUNC_ADD)
 		render.SetMaterial(sprite)
-		render.DrawSprite(self:GetPos(), size, size)
+		render.DrawSprite(self:GetPos(), 150, 150)
 		render.OverrideBlend(false)
 
 		local ang = (EyePos() - self:GetPos()):Angle()
