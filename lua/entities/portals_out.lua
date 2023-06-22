@@ -11,11 +11,22 @@ ENT.Editable = true
 
 ENT.BaseColor = Color(100, 200, 0)
 
+local defaultSound = GetConVar("portals_default_sound")
+
 function ENT:SetupDataTables()
 	self:NetworkVar("String", 0, "Group", {
 		KeyName = "group",
 		Edit = {
 			order = 0,
+			type = "Generic"
+		}
+	})
+
+	self:NetworkVar("String", 1, "TeleportSound", {
+		KeyName = "sound",
+		Edit = {
+			title = "Teleport Sound",
+			order = 1,
 			type = "Generic"
 		}
 	})
@@ -28,6 +39,7 @@ function ENT:SetupDataTables()
 		}
 	})
 
+	self:SetTeleportSound(defaultSound:GetString())
 	self:SetPortalColor(self.BaseColor:ToVector())
 end
 

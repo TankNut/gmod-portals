@@ -13,6 +13,8 @@ ENT.BaseColor = Color(255, 136, 0)
 
 ENT.ExitType = "portals_classic_out"
 
+local defaultSound = GetConVar("portals_default_sound")
+
 function ENT:SetupDataTables()
 	self:NetworkVar("String", 0, "Group", {
 		KeyName = "group",
@@ -21,6 +23,17 @@ function ENT:SetupDataTables()
 			type = "Generic"
 		}
 	})
+
+	self:NetworkVar("String", 1, "TeleportSound", {
+		KeyName = "sound",
+		Edit = {
+			title = "Teleport Sound",
+			order = 1,
+			type = "Generic"
+		}
+	})
+
+	self:SetTeleportSound(defaultSound:GetString())
 end
 
 function ENT:GetCustomColor()

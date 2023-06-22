@@ -98,12 +98,25 @@ if CLIENT then
 		self:DrawModel()
 	end
 else
+	local allowSound = GetConVar("portals_allow_custom_sounds")
+	local defaultSound = GetConVar("portals_default_sound")
+
 	function ENT:TeleportEffect(ent)
 		if not ent then
 			ent = self
 		end
 
-		ent:EmitSound("beams/beamstart5.wav", 75, 100, 0.5)
+		local snd = defaultSound:GetString()
+
+		if allowSound:GetBool() and self.GetTeleportSound then
+			snd = self:GetTeleportSound()
+		end
+
+		if snd == "" then
+			return
+		end
+
+		ent:EmitSound(snd, 75, 100, 0.5)
 	end
 
 	function ENT:IsValidEntity(ent)

@@ -3,6 +3,9 @@ if SERVER then
 end
 
 CreateConVar("portals_allow_custom_colors", 1, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether players should be able to change portal colors.", 0, 1)
+CreateConVar("portals_allow_custom_sounds", 1, {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "Whether players should be able to change portal sounds.", 0, 1)
+
+CreateConVar("portals_default_sound", "beams/beamstart5.wav", {FCVAR_ARCHIVE, FCVAR_REPLICATED}, "The default sound that is used for portal effects.")
 
 if CLIENT then
 	CreateClientConVar("portals_lights_enabled", 1, true, false, "Whether portals should emit light.", 0, 1)
