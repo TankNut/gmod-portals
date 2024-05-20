@@ -100,6 +100,7 @@ if CLIENT then
 else
 	local allowSound = GetConVar("portals_allow_custom_sounds")
 	local defaultSound = GetConVar("portals_default_sound")
+	local extendedWhitelist = GetConVar("portals_extended_whitelist")
 
 	function ENT:TeleportEffect(ent)
 		if not ent then
@@ -122,6 +123,10 @@ else
 	function ENT:IsValidEntity(ent)
 		if ent:IsPlayer() then
 			return ent:GetMoveType() != MOVETYPE_NOCLIP
+		end
+
+		if not extendedWhitelist:GetBool() and not ent:IsNPC() then
+			return false
 		end
 
 		local phys = ent:GetPhysicsObject()
